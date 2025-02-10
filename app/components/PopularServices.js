@@ -20,7 +20,7 @@ export default function PopularServices() {
     {
       id: 2,
       title: "Web Design",
-      image: "https://img.freepik.com/free-photo/web-design-concepts-with-blurred-background_1134-82.jpg",
+      image: "https://d18jakcjgoan9.cloudfront.net/s/img/home/web-design.jpg!d=v1NTZ1",
     },
     {
       id: 3,
@@ -31,7 +31,7 @@ export default function PopularServices() {
     {
       id: 4,
       title: "Counselling",
-      image: "https://cdn.adu.ac.ae/images-container/images/default-source/adu-new-images/student-councelling-web.jpg?sfvrsn=508f52a6_4",
+      image: "https://www.riversidecollege.ac.uk/wp-content/uploads/2020/11/foundation-degree-counselling-Course-Riverside-College-Higher-Education-Courses-Widnes-Runcorn-St-Helens-Warrington-Liverpool-Web-2.jpg", // Simulating missing image
       badge: "Available online",
     },
     {
@@ -50,25 +50,15 @@ export default function PopularServices() {
 
   // Simulating Fetching Data from Backend
   useEffect(() => {
-    async function fetchServices() {
-      try {
-        console.log("Fetching services...");
-        const backendData = null; // Simulating no backend data
-        if (backendData) {
-          console.log("✅ Backend data found:", backendData);
-          setServiceImages(backendData);
-        } else {
-          console.log("⚠️ No backend data, using dummy data");
-          setServiceImages(uniqueServices);
-        }
-      } catch (error) {
-        console.error("❌ Error fetching services:", error);
-        setServiceImages(uniqueServices);
-      }
-    }
-
-    fetchServices();
+    console.log("Fetching services...");
+    setServiceImages(uniqueServices);
   }, []);
+
+  const handleImageError = (e) => {
+    if (e.target.src !== "/noimage.jpg") {
+      e.target.src = "/noimage.jpg"; // Use fallback image from public directory
+    }
+  };
 
   return (
     <section className="py-5 bg-light">
@@ -101,7 +91,12 @@ export default function PopularServices() {
               <SwiperSlide key={service.id}>
                 <div className="image-container">
                   {service.badge && <div className="badge-overlay">{service.badge}</div>}
-                  <img src={service.image} className="service-image" alt={service.title} />
+                  <img
+                    src={service.image || "/noimage.jpg"}
+                    alt={service.title}
+                    className="service-image"
+                    onError={handleImageError}
+                  />
                   <div className="image-title">{service.title}</div>
                 </div>
               </SwiperSlide>

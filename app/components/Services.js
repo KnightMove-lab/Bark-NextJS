@@ -1,134 +1,113 @@
 "use client";
 
+import { useState, useEffect } from "react";
+
 export default function Services() {
+  const [serviceImages, setServiceImages] = useState({ homeGarden: [] });
+
+  // Dummy Data (Used If No Backend Data Available)
+  const dummyServices = {
+    homeGarden: [
+      {
+        id: 1,
+        title: "Gardening",
+        image:
+          "https://thumbs.dreamstime.com/b/man-woman-janitors-cleaners-cleaning-people-working-washing-cleaning-equipmen-set-cleaning-stuff-service-professional-84136749.jpg",
+      },
+      {
+        id: 2,
+        title: "House Cleaning",
+        image:
+          "https://scrubnbubbles.com/wp-content/uploads/2022/05/cleaning-service.jpeg",
+      },
+      {
+        id: 3,
+        title: "Painting & Decorating",
+        image:
+          "https://d18jakcjgoan9.cloudfront.net/s/img/home/painting-decorating.jpg!d=v1NTZ1", // Simulating missing image
+      },
+    ],
+  };
+
+  useEffect(() => {
+    console.log("Fetching services...");
+    setServiceImages(dummyServices);
+  }, []);
+
+  // Fallback image function
+  const handleImageError = (e) => {
+    if (e.target.src !== "/noimage.jpg") {
+      e.target.src = "/noimage.jpg"; // Use fallback image from public directory
+    }
+  };
+
   return (
     <section className="py-5 bg-light">
+      <style jsx>{`
+        .container {
+          max-width: 1100px; /* Limits width to 1100px */
+        }
+
+        /* Keeps all images the same height */
+        .fixed-height-img {
+          height: 220px;
+          width: 100%;
+          object-fit: cover;
+          border-radius: 10px;
+        }
+
+        /* Title overlay styling */
+        .overlay-title {
+          position: absolute;
+          bottom: 10px;
+          left: 10px;
+          background: rgba(0, 0, 0, 0.8);
+          color: #fff;
+          padding: 5px 10px;
+          font-size: 1rem;
+          font-weight: bold;
+          border-radius: 5px;
+        }
+
+        /* Card hover effect */
+        .card {
+          position: relative;
+          border: none;
+          transition: transform 0.3s ease-in-out;
+        }
+
+        .card:hover {
+          transform: translateY(-5px);
+        }
+      `}</style>
+
       <div className="container">
-        {/* Home & Garden */}
-        <div className="mb-5">
+        <h2 className="text-center mb-4">Popular Services</h2>
+
+        {/* Home & Garden Section */}
+        <div>
           <div className="d-flex justify-content-between align-items-center mb-3">
             <h3 className="mb-0">Home &amp; Garden</h3>
             <a href="#" className="text-decoration-none">
               View All
             </a>
           </div>
-          <div className="row row-cols-1 row-cols-md-4 g-4">
-            {/* Card 1 */}
-            <div className="col">
-              <div className="card hover-lift position-relative">
-                <img
-                  src="https://thumbs.dreamstime.com/b/man-woman-janitors-cleaners-cleaning-people-working-washing-cleaning-equipmen-set-cleaning-stuff-service-professional-84136749.jpg"
-                  alt="Gardening"
-                  className="card-img-top"
-                />
-                <div className="card-body text-center">
-                  <h5 className="card-title mb-0">Gardening</h5>
-                </div>
-              </div>
-            </div>
-            {/* Card 2 */}
-            <div className="col">
-              <div className="card hover-lift">
-                <img
-                  src="https://via.placeholder.com/300x200.png?text=Cleaning"
-                  alt="House Cleaning"
-                  className="card-img-top"
-                />
-                <div className="card-body text-center">
-                  <h5 className="card-title mb-0">House Cleaning</h5>
-                </div>
-              </div>
-            </div>
-            {/* Card 3 */}
-            <div className="col">
-              <div className="card hover-lift">
-                <img
-                  src="https://via.placeholder.com/300x200.png?text=Painting"
-                  alt="Painting"
-                  className="card-img-top"
-                />
-                <div className="card-body text-center">
-                  <h5 className="card-title mb-0">
-                    Painting &amp; Decorating
-                  </h5>
-                </div>
-              </div>
-            </div>
-            {/* Card 4 */}
-            <div className="col">
-              <div className="card hover-lift">
-                <img
-                  src="https://via.placeholder.com/300x200.png?text=Pest+Control"
-                  alt="Pest Control"
-                  className="card-img-top"
-                />
-                <div className="card-body text-center">
-                  <h5 className="card-title mb-0">Pest Control</h5>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        {/* Health & Wellbeing */}
-        <div className="mb-5">
-          <div className="d-flex justify-content-between align-items-center mb-3">
-            <h3 className="mb-0">Health &amp; Wellbeing</h3>
-            <a href="#" className="text-decoration-none">
-              View All
-            </a>
-          </div>
-          <div className="row row-cols-1 row-cols-md-4 g-4">
-            <div className="col">
-              <div className="card hover-lift position-relative">
-                <div className="badge-overlay">Available online</div>
-                <img
-                  src="https://via.placeholder.com/300x200.png?text=Personal+Training"
-                  alt="Personal Training"
-                  className="card-img-top"
-                />
-                <div className="card-body text-center">
-                  <h5 className="card-title mb-0">Personal Training</h5>
+          {/* ✅ Fix: Ensures correct column count */}
+          <div className="row row-cols-1 row-cols-md-3 g-4 mt-3">
+            {serviceImages?.homeGarden?.map((service, index) => (
+              <div className="col" key={service.id || index}>
+                <div className="card hover-lift">
+                  <img
+                    src={service.image || "/noimage.jpg"}
+                    alt={service.title}
+                    className="card-img-top fixed-height-img"
+                    onError={handleImageError}
+                  />
+                  <div className="overlay-title">{service.title}</div>
                 </div>
               </div>
-            </div>
-            <div className="col">
-              <div className="card hover-lift position-relative">
-                <div className="badge-overlay">Available online</div>
-                <img
-                  src="https://via.placeholder.com/300x200.png?text=Counselling"
-                  alt="Counselling"
-                  className="card-img-top"
-                />
-                <div className="card-body text-center">
-                  <h5 className="card-title mb-0">Counselling</h5>
-                </div>
-              </div>
-            </div>
-            <div className="col">
-              <div className="card hover-lift">
-                <img
-                  src="https://via.placeholder.com/300x200.png?text=Massage"
-                  alt="Massage Therapy"
-                  className="card-img-top"
-                />
-                <div className="card-body text-center">
-                  <h5 className="card-title mb-0">Massage Therapy</h5>
-                </div>
-              </div>
-            </div>
-            <div className="col">
-              <div className="card hover-lift">
-                <img
-                  src="https://via.placeholder.com/300x200.png?text=Nutrition"
-                  alt="Nutritionist"
-                  className="card-img-top"
-                />
-                <div className="card-body text-center">
-                  <h5 className="card-title mb-0">Nutritionist</h5>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

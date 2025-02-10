@@ -24,8 +24,10 @@ export default function Header() {
           {/* Left side: Logo and Explore */}
           <div className="d-flex align-items-center gap-3">
             {/* Logo */}
-            <div className="fs-4 fw-bold text-primary">bark</div>
-
+            <Link href="/" className="fs-4 fw-bold text-dark text-decoration-none d-flex align-items-center">
+      <span className="brand">LIGHT HOUSE</span>
+      <span className="brand-icon">⚓</span> {/* Add an icon next to it */}
+    </Link>
             {/* Explore Dropdown */}
             <div className="position-relative">
               <button
@@ -124,7 +126,7 @@ export default function Header() {
 
           {/* Right Side: Login and Button */}
           <div className="d-flex align-items-center gap-3">
-            <Link href="#" className="text-dark text-decoration-none">
+            <Link href="/login" className="text-dark text-decoration-none">
               Login
             </Link>
             <button className="btn btn-primary d-none d-md-block">
