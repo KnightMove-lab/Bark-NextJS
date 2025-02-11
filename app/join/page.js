@@ -1,9 +1,27 @@
 // app/join/page.js
 
+import Link from "next/link";
+
+
 export const metadata = {
   title: "Join as a Professional",
   description: "Join page for professionals",
 };
+
+const services = [
+  { name: "House Cleaning", icon: "bi bi-house-door-fill" },
+  { name: "Graphic Design", icon: "bi bi-palette-fill" },
+  { name: "Life Coaching", icon: "bi bi-people-fill" },
+  { name: "Bookkeeping Services", icon: "bi bi-file-earmark-text" },
+  { name: "Web Design", icon: "bi bi-laptop" },
+  { name: "Building Contractors", icon: "bi bi-tools" },
+  { name: "General Photography", icon: "bi bi-camera-fill" },
+  { name: "Personal Trainers", icon: "bi bi-heart-pulse-fill" },
+  { name: "Web Development", icon: "bi bi-code-slash" },
+  { name: "Gardening", icon: "bi bi-flower2" },
+  { name: "Social Media Marketing", icon: "bi bi-chat-dots-fill" },
+  { name: "Commercial & Office Cleaning", icon: "bi bi-building" },
+];
 
 export default function JoinPage() {
   return (
@@ -37,54 +55,16 @@ export default function JoinPage() {
               {/* Popular services (two-column list) with icons */}
               <h5 className="fw-semibold mb-2">Popular services</h5>
               <div className="row row-cols-2 g-2 text-secondary">
-                <div className="col">
-                  <i className="bi bi-house-door-fill me-2"></i>
-                  House Cleaning
-                </div>
-                <div className="col">
-                  <i className="bi bi-palette-fill me-2"></i>
-                  Graphic Design
-                </div>
-                <div className="col">
-                  <i className="bi bi-people-fill me-2"></i>
-                  Life Coaching
-                </div>
-                <div className="col">
-                  <i className="bi bi-file-earmark-text me-2"></i>
-                  Bookkeeping Services
-                </div>
-                <div className="col">
-                  <i className="bi bi-laptop me-2"></i>
-                  Web Design
-                </div>
-                <div className="col">
-                  <i className="bi bi-tools me-2"></i>
-                  Building Contractors
-                </div>
-                <div className="col">
-                  <i className="bi bi-camera-fill me-2"></i>
-                  General Photography
-                </div>
-                <div className="col">
-                  <i className="bi bi-heart-pulse-fill me-2"></i>
-                  Personal Trainers
-                </div>
-                <div className="col">
-                  <i className="bi bi-code-slash me-2"></i>
-                  Web Development
-                </div>
-                <div className="col">
-                  <i className="bi bi-flower2 me-2"></i>
-                  Gardening
-                </div>
-                <div className="col">
-                  <i className="bi bi-chat-dots-fill me-2"></i>
-                  Social Media Marketing
-                </div>
-                <div className="col">
-                  <i className="bi bi-building me-2"></i>
-                  Commercial & Office Cleaning
-                </div>
+                {services.map(({ name, icon }, index) => (
+                  <div className="col" key={index}>
+                    <Link
+                      href={`/register?service=${encodeURIComponent(name)}`}
+                      className="text-decoration-none text-dark d-flex align-items-center"
+                    >
+                      <i className={`${icon} me-2`}></i> {name}
+                    </Link>
+                  </div>
+                ))}
               </div>
             </div>
 

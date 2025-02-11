@@ -129,42 +129,17 @@ export default function Header() {
             <Link href="/login" className="text-dark text-decoration-none">
               Login
             </Link>
-            <button className="btn btn-primary d-none d-md-block">
-              Join as a Professional
-            </button>
+            <Link href="/join" passHref>
+  <button className="btn btn-primary d-none d-md-block">
+    Join as a Professional
+  </button>
+</Link>
           </div>
         </div>
       </div>
 
       {/* CSS Styles */}
-      <style jsx>{`
-        .search-container {
-          display: flex;
-          align-items: center;
-          background: #f8f9fa;
-          border-radius: 25px;
-          padding: 5px 10px;
-          width: 280px;
-          margin-left: auto; /* Moves it closer to Login */
-        }
-        .search-input {
-          flex: 1;
-          border: none;
-          outline: none;
-          background: transparent;
-          font-size: 14px;
-          padding: 5px;
-        }
-        .search-button {
-          background: none;
-          border: none;
-          color: #555;
-          cursor: pointer;
-        }
-        .search-button i {
-          font-size: 18px;
-        }
-      `}</style>
+    
     </header>
   );
 }

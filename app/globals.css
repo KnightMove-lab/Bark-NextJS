@@ -17,6 +17,56 @@
   border-radius: 4px;
 }
 
+/* Scrollbar Track */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-radius: 10px;
+}
+
+/* Default Scrollbar Thumb */
+::-webkit-scrollbar-thumb {
+  background: #000;
+  border-radius: 10px;
+  min-height: 20px !important; /* Ensures scrollbar thumb is visible */
+}
+
+/* Scrollbar Thumb on Hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(9, 9, 173);
+  min-height: 20px; /* Reduces height when hovered */
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  background: #f8f9fa;
+  border-radius: 25px;
+  padding: 5px 10px;
+  width: 280px;
+  margin-left: auto; /* Moves it closer to Login */
+}
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  padding: 5px;
+}
+.search-button {
+  background: none;
+  border: none;
+  color: #555;
+  cursor: pointer;
+}
+.search-button i {
+  font-size: 18px;
+}
 
 
 /* Slight card hover effect */
